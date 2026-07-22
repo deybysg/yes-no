@@ -3,7 +3,7 @@ import Button from './Button';
 import AnswerEffect from './AnswerEffect';
 import './QuestionCard.css';
 
-function QuestionCard({ question, onAnswer, onSurprise }) {
+function QuestionCard({ question, onAnswer }) {
   const [effect, setEffect] = useState(null);
   
   const handleAnswer = (answer) => {
@@ -36,10 +36,6 @@ function QuestionCard({ question, onAnswer, onSurprise }) {
             No 😢
           </Button>
         </div>
-        
-        <Button type="surprise" onClick={onSurprise}>
-          🎲 Sorpréndeme
-        </Button>
       </div>
     </>
   );

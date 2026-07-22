@@ -136,7 +136,6 @@ function GirlfriendView() {
         <QuestionCard 
           question={questions[currentIndex]}
           onAnswer={handleAnswer}
-          onSurprise={handleSurprise}
         />
       </main>
       
