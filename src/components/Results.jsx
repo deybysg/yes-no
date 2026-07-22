@@ -3,7 +3,7 @@ import Button from './Button';
 import './Results.css';
 
 function Results({ responses, questions, onRestart, personName }) {
-  const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [phase, setPhase] = useState('romantic');
   const [hearts, setHearts] = useState([]);
   
   const yesCount = Object.values(responses).filter(r => r === true).length;
@@ -11,28 +11,19 @@ function Results({ responses, questions, onRestart, personName }) {
   const total = Object.keys(responses).length;
   
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowFinalMessage(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-  
-  useEffect(() => {
-    if (showFinalMessage) {
-      const newHearts = [];
-      for (let i = 0; i < 50; i++) {
-        newHearts.push({
-          id: i,
-          emoji: ['\u{1F495}', '\u{1F496}', '\u{1F497}', '\u{1F498}', '\u{2764}\u{FE0F}', '\u{2728}', '\u{1F31F}', '\u{1F49D}', '\u{1F49E}', '\u{1F493}', '\u{1F970}', '\u{1F60D}'][Math.floor(Math.random() * 12)],
-          left: Math.random() * 100,
-          delay: Math.random() * 3,
-          duration: 2 + Math.random() * 3,
-          size: 1 + Math.random() * 2
-        });
-      }
-      setHearts(newHearts);
+    const newHearts = [];
+    for (let i = 0; i < 50; i++) {
+      newHearts.push({
+        id: i,
+        emoji: ['\u{1F495}', '\u{1F496}', '\u{1F497}', '\u{1F498}', '\u{2764}\u{FE0F}', '\u{2728}', '\u{1F31F}', '\u{1F49D}', '\u{1F49E}', '\u{1F493}', '\u{1F970}', '\u{1F60D}'][Math.floor(Math.random() * 12)],
+        left: Math.random() * 100,
+        delay: Math.random() * 3,
+        duration: 2 + Math.random() * 3,
+        size: 1 + Math.random() * 2
+      });
     }
-  }, [showFinalMessage]);
+    setHearts(newHearts);
+  }, []);
   
   const getMessage = () => {
     const name = personName || 'tu';
@@ -43,7 +34,7 @@ function Results({ responses, questions, onRestart, personName }) {
     return name + ', todavia nos queda mucho por descubrir juntos!';
   };
   
-  if (showFinalMessage) {
+  if (phase === 'romantic') {
     return (
       <div className="final-message-container">
         <div className="final-hearts">
@@ -80,7 +71,10 @@ function Results({ responses, questions, onRestart, personName }) {
           <div className="final-emoji-bottom">{'\u{1F496}'}</div>
         </div>
         
-        <div className="final-restart">
+        <div className="final-buttons">
+          <Button type="yes" onClick={() => setPhase('results')}>
+            Ver Resultados
+          </Button>
           <Button type="restart" onClick={onRestart}>
             Empezar de Nuevo
           </Button>

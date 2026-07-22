@@ -321,3 +321,13 @@
   z-index: 10;
   margin-top: 40px;
 }
+
+.final-buttons {
+  position: relative;
+  z-index: 10;
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
