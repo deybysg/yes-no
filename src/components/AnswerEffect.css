@@ -10,78 +10,148 @@
   justify-content: center;
   z-index: 1000;
   pointer-events: none;
-  animation: fadeInOut 2s ease;
+  overflow: hidden;
 }
 
-.effect-yes {
-  background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, rgba(255, 182, 193, 0.2) 100%);
+.effect-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: bgFade 2.5s ease;
 }
 
-.effect-no {
-  background: radial-gradient(circle, rgba(100, 100, 150, 0.3) 0%, rgba(150, 150, 200, 0.2) 100%);
+.effect-yes .effect-bg {
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, rgba(255, 182, 193, 0.4) 50%, rgba(255, 192, 203, 0.2) 100%);
 }
 
-@keyframes fadeInOut {
-  0% { opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; }
+.effect-no .effect-bg {
+  background: radial-gradient(circle, rgba(70, 70, 100, 0.6) 0%, rgba(100, 100, 150, 0.4) 50%, rgba(150, 150, 200, 0.2) 100%);
+}
+
+@keyframes bgFade {
+  0% { opacity: 0; transform: scale(0.5); }
+  30% { opacity: 1; transform: scale(1.2); }
+  70% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+.effect-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: contentPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes contentPop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .effect-emoji {
-  font-size: 6rem;
-  animation: bounce 0.5s ease infinite alternate;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  font-size: 8rem;
+  text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
 
 .effect-yes .effect-emoji {
-  animation: happyBounce 0.3s ease infinite alternate;
+  animation: happyDance 0.4s ease infinite alternate;
 }
 
 .effect-no .effect-emoji {
-  animation: sadShake 0.5s ease infinite;
+  animation: sadCry 0.6s ease infinite;
 }
 
-@keyframes happyBounce {
-  0% { transform: scale(1) translateY(0); }
-  100% { transform: scale(1.2) translateY(-20px); }
+@keyframes happyDance {
+  0% { transform: scale(1) rotate(-10deg) translateY(0); }
+  50% { transform: scale(1.2) rotate(10deg) translateY(-20px); }
+  100% { transform: scale(1.1) rotate(-5deg) translateY(-10px); }
 }
 
-@keyframes sadShake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-10px) rotate(-5deg); }
-  75% { transform: translateX(10px) rotate(5deg); }
+@keyframes sadCry {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  20% { transform: translateX(-15px) translateY(5px) rotate(-10deg); }
+  40% { transform: translateX(15px) translateY(5px) rotate(10deg); }
+  60% { transform: translateX(-10px) translateY(10px) rotate(-5deg); }
+  80% { transform: translateX(10px) translateY(10px) rotate(5deg); }
 }
 
 .effect-text {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-top: 20px;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  animation: textSlide 0.6s ease;
+}
+
+@keyframes textSlide {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .effect-yes .effect-text {
-  color: #FF6B6B;
+  color: #FF1493;
 }
 
 .effect-no .effect-text {
-  color: #666;
+  color: #4A4A6A;
+}
+
+.effect-subtext {
+  font-size: 3rem;
+  margin-top: 10px;
+  animation: pulse 0.5s ease infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.3); }
 }
 
 .particle {
   position: absolute;
-  font-size: 2rem;
-  animation: floatUp 1.5s ease-out forwards;
+  animation: floatUp 2s ease-out forwards;
   opacity: 0;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes floatUp {
+.particle-yes {
+  animation: floatUpYes 2s ease-out forwards;
+}
+
+.particle-no {
+  animation: floatUpNo 2s ease-out forwards;
+}
+
+@keyframes floatUpYes {
   0% {
     opacity: 1;
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh) rotate(0deg) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(50vh) rotate(180deg) scale(1.2);
   }
   100% {
     opacity: 0;
-    transform: translateY(-100px) rotate(720deg);
+    transform: translateY(-100px) rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes floatUpNo {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(30vh) rotate(-90deg) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(60vh) rotate(-180deg) scale(0.6);
   }
 }
