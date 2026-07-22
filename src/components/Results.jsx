@@ -55,7 +55,14 @@ function Results({ responses, questions, onRestart, personName }) {
         </div>
         
         <div className="final-content">
-          <div className="final-emoji">{'\u{1F495}'}</div>
+          <div className="final-photo-container">
+            <img src="/images/us.jpeg" alt="Nosotros" className="final-photo" />
+            <div className="photo-hearts">
+              <span>{'\u{1F495}'}</span>
+              <span>{'\u{1F496}'}</span>
+              <span>{'\u{1F495}'}</span>
+            </div>
+          </div>
           
           <h1 className="final-text">
             <span className="line-1">No busco a alguien perfecto,</span>
