@@ -127,7 +127,7 @@ function GirlfriendView() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>💕 Preguntas para {personName} 💕</h1>
+        <h1>💕 Preguntas 💕</h1>
         <p>Responde con el corazón</p>
       </header>
       
